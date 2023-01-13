@@ -94,9 +94,7 @@ contract StakingPool is IStakingPool {
 
     // keeping this for future insurance mechanism
     function slash(uint256 amount) external override {
-
         require(_msgSender() == core.oracle(), "StakingPool: only oracle can call to slash");
-
         uint256 pstakeBalance = pstake.balanceOf(address(this));
 
         if (pstakeBalance == 0) {
