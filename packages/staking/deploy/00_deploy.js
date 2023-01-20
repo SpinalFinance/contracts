@@ -1,4 +1,3 @@
-require("hardhat-deploy")
 require("hardhat-deploy-ethers")
 
 const ethers = require("ethers")
@@ -29,6 +28,7 @@ async function callRpc(method, params) {
         }),
     }
     const res = await request(options)
+    console.log(res)
     return JSON.parse(res.body).result
 }
 
@@ -38,17 +38,17 @@ module.exports = async ({ deployments }) => {
     const { deploy } = deployments
 
     const priorityFee = await callRpc("eth_maxPriorityFeePerGas")
-    
+
     // Wraps Hardhat's deploy, logging errors to console.
     const deployLogError = async (title, obj) => {
-        let ret;
+        let ret
         try {
-            ret = await deploy(title, obj);
+            ret = await deploy(title, obj)
         } catch (error) {
             console.log(error.toString())
             process.exit(1)
         }
-        return ret;
+        return ret
     }
 
     console.log("Wallet Ethereum Address:", deployer.address)
