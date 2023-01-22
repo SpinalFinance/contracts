@@ -12,6 +12,7 @@ function hexToBytes(hex) {
     return new Uint8Array(bytes)
 }
 
+// Call RPC
 async function callRpc(method, params) {
     var options = {
         method: "POST",
