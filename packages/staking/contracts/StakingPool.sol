@@ -19,6 +19,7 @@ contract StakingPool is IStakingPool {
 
     IStkFIL public stkEth;
 
+    // ICOre is the interface required
     ICore public core;
 
     IPriceOracle public oracle;
@@ -41,7 +42,7 @@ contract StakingPool is IStakingPool {
         address _weth)
     public initializer
     {
-        require(_weth != address(0), "Invalid weth address");
+        require(eth != address(0), "Invalid weth address");
         __Ownable_init();
         oracle = _oracle;
         pstake = _pstake;
@@ -70,7 +71,7 @@ contract StakingPool is IStakingPool {
 
         uint256 totalValidators = IOracle(core.oracle()).activatedValidators() + IIssuer(core.issuer()).pendingValidators();
 
-        require(stkEth.transferFrom(_msgSender(), address(this), newReward), "Transfer failed");
+        require(stkEth.transferFrom(_msgSender(), address(this), newReward), "Stake Transfer failed");
 
         accRewardPerValidator += newReward * 1e12 / totalValidators;
     }
