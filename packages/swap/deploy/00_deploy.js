@@ -16,7 +16,7 @@ function hexToBytes(hex) {
 async function callRpc(method, params) {
     var options = {
         method: "POST",
-        url: "https://wallaby.node.glif.io/rpc/v0",
+        url: "https://hyperspace.node.glif.io/rpc/v0",
         // url: "http://localhost:1234/rpc/v0",
         headers: {
             "Content-Type": "application/json",
@@ -38,17 +38,17 @@ module.exports = async ({ deployments }) => {
     const { deploy } = deployments
 
     const priorityFee = await callRpc("eth_maxPriorityFeePerGas")
-    
+
     // Wraps Hardhat's deploy, logging errors to console.
     const deployLogError = async (title, obj) => {
-        let ret;
+        let ret
         try {
-            ret = await deploy(title, obj);
+            ret = await deploy(title, obj)
         } catch (error) {
             console.log(error.toString())
             process.exit(1)
         }
-        return ret;
+        return ret
     }
 
     console.log("Wallet Ethereum Address:", deployer.address)
